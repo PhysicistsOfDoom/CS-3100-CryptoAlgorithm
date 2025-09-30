@@ -1,0 +1,52 @@
+/* Apply to the whole page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 40px;
+}
+
+/* Form container */
+form {
+  background-color: #fff;
+  padding: 20px 25px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Form labels */
+form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+/* Input and textarea fields */
+form input[type="text"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Submit button */
+form input[type="submit"] {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+form input[type="submit"]:hover {
+  background-color: #0056b3;
+}
