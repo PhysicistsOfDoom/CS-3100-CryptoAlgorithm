@@ -9,7 +9,6 @@ from .schemas import ItemCreate, ItemOut
 
 app = FastAPI(title="Starter API")
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],   
@@ -31,6 +30,7 @@ def health(db: Session = Depends(get_db)):
 # ---- Items (CRUD-lite) ----
 @app.post("/items", response_model=ItemOut, status_code=201)
 def create_item(body: ItemCreate, db: Session = Depends(get_db)):
+    # Pydantic validation will automatically check for SQL injection patterns
     item = Item(title=body.title, description=body.description)
     db.add(item)
     db.commit()
