@@ -1,12 +1,14 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("message-form");
+    const getMessageForm = document.getElementById("get-message-form");
+    
+    const message = document.getElementById("message").value;
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const name = document.getElementById("name").value;
-        const message = document.getElementById("name").value;
 
         // If the form validation function returns true send the post request to the route in fetch
         if (validateForm(name, message)) {
@@ -31,6 +33,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error(err);
             });          
         }
+    });
+
+    getMessageForm.addEventListener("submit", e => {
+        e.preventDefault();
+
+        const name = document.getElementById("getName").value;
+
+        fetch(`/${name}`) 
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            message.value = data.message; // assuming that the json sent from the server has attribute .message
+        })
+        .catch(err => {
+            console.error(err);
+        });
     });
 });
 
