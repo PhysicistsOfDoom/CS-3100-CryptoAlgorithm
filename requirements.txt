@@ -1,4 +1,0 @@
--e git+https://github.com/PhysicistsOfDoom/CS-3100-CryptoAlgorithm.git@268cfdfda686077e9e9fe8c99b30f68374e2f421#egg=algorithm_package
-cffi==2.0.0
-cryptography==46.0.1
-pycparser==2.23
