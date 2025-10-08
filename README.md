@@ -1,73 +1,107 @@
-# CS3100 CryptoAlgorithm – String Encryption
+# Dual Defense
 
-This project provides a simple Python package (`algorithm_package`) with functions to **encrypt** and **decrypt strings** using the `cryptography` library (Fernet symmetric encryption).
+Dual Defense is a Vanilla JS Front end, FastAPI Backend. Custom Algorithm to demonstrate Sufficient Encryption & Input Validation.
 
----
 
-## Installation
+## Overview
+Web Page input takes message -> Validates Input -> Sends to Backend API -> Encryption Applied to message -> Stores in SQLalchemy Database.
 
-1. Clone the Repository
 
+
+## Setup
+
+1. Clone Repo
+
+```bash
 git clone https://github.com/PhysicistsOfDoom/CS-3100-CryptoAlgorithm.git
 cd CS-3100-CryptoAlgorithm
-
-
-=====================================================================
-
-2. Create and Activate Virtual Environment
-
-On Windows (Git Bash):
-
+```
+2. Set up Virtual Environment
+```
 python -m venv venv
-source venv/Scripts/activate
+source venv/bin/activate   # (Mac/Linux)
+venv\Scripts\activate.bat  # (Windows)
+```
 
+3. Install Dependencies (Optional if you choose to run with Docker)
 
-On Mac/Linux:
-
-python3 -m venv venv
-source venv/bin/activate
-
-
-===========================================================================
-
-3. Install Dependencies
-
-Dependencies are listed in requirements.txt. Install them with:
-
+```bash
 pip install -r requirements.txt
+```
+
+4. Run the Project. There are **3** options!
+### Option 1: Scripts/
+From the repo root /
+```bash
+./Scripts/run.sh
+```
+Windows PowerShell:
+```bash
+.\Scripts\run.bat 
+```
+
+### Option 2: Docker Compose
+
+```bash
+docker-compose up --build
+```
+### Option 3: Manually
+
+```bash
+# Start Backend
+cd Backend/
+uvicorn main:app --reload
+
+# Start Frontend
+cd ../Frontend
+python -m http.server 3000
+```
+## Usage
+When both servers are running: The pages by default are accessible via:
+```
+Backend API: http://localhost:8000
+Frontend: http://localhost:3000
+```
+## Tech Stack
+- FastAPI
+- SQLAlchemy
+- Python 3.11
+- HTML, CSS, JavaScript
+## Project Structure
+CS-3100-CryptoAlgorithm/
+├── Backend/
+│   ├── algorithm_package/
+│   │   ├── __init__.py
+│   │   ├── algorithm.py
+│   │   ├── db.py
+│   │   └── string_encryption.py
+│   ├── DockerFile
+│   ├── main.py
+│   ├── models.py
+│   └── schemas.py
+├── Frontend/
+│   ├── DockerFile
+│   ├── front_end_string_encryption.py
+│   ├── index.html
+│   ├── index.js
+│   └── styles.css
+├── Scripts/
+│   ├── run.bat
+│   └── run.sh
+├── .gitignore
+├── docker-compose.yml
+├── LICENSE
+├── README.md
+├── requirements.txt
+└── setup.py
 
 
-Alternatively, install the package in editable mode:
 
-pip install -e .
+## Contributing
 
-========================================================================
-
-Usage
-
-Run the demo script to test encryption/decryption:
-
-python string_encryption.py
-
-Example Output
-Original Text:   hello team
-Generated Key:   UC6x4P5eA0fnbj5_w6dbY9Yz...
-Encrypted Text:  gAAAAABn2-0dktm3klv8XY6H...
-Decrypted Text:  hello team
-
-==========================================================================
+This is a UVU Team demonstrating knowledge of encryption across networks. Both across the wire, through APIs and Storage.
 
 
-In Your Own Code
+## License
 
-You can import and use the functions directly:
-
-from algorithm_package import algorithm
-from string_encryption import encrypt_string, decrypt_string
-
-# Encrypt
-key, cipher = encrypt_string("secret message")
-
-# Decrypt
-plain = decrypt_string(key, cipher)
-print("Decrypted:", plain)
+[MIT](https://choosealicense.com/licenses/mit/)
