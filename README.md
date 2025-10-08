@@ -1,32 +1,73 @@
-# CS3100 Algorithm (Group 2)
+# CS3100 CryptoAlgorithm – String Encryption
 
-This algorithm is meant to ensure Integrity.
+This project provides a simple Python package (`algorithm_package`) with functions to **encrypt** and **decrypt strings** using the `cryptography` library (Fernet symmetric encryption).
+
+---
 
 ## Installation
 
-To run, you will need the following requirements:
+1. Clone the Repository
 
-1. Python 3.12.3
-2. Algorithm Package
+git clone https://github.com/PhysicistsOfDoom/CS-3100-CryptoAlgorithm.git
+cd CS-3100-CryptoAlgorithm
 
-```bash
-pip install algorithm_package
-```
 
-## Usage
+=====================================================================
 
-```python
-import algorithm_package
+2. Create and Activate Virtual Environment
 
-# Returns TAG
-tag = algorithm_package.algorithm(key, message)
+On Windows (Git Bash):
 
-```
+python -m venv venv
+source venv/Scripts/activate
 
-## Contributing
 
-All contributers of Group #2 in CS 3100 contribute to the success and functionality of this package.
+On Mac/Linux:
 
-## License
+python3 -m venv venv
+source venv/bin/activate
 
-[MIT](https://choosealicense.com/licenses/mit/)
+
+===========================================================================
+
+3. Install Dependencies
+
+Dependencies are listed in requirements.txt. Install them with:
+
+pip install -r requirements.txt
+
+
+Alternatively, install the package in editable mode:
+
+pip install -e .
+
+========================================================================
+
+Usage
+
+Run the demo script to test encryption/decryption:
+
+python string_encryption.py
+
+Example Output
+Original Text:   hello team
+Generated Key:   UC6x4P5eA0fnbj5_w6dbY9Yz...
+Encrypted Text:  gAAAAABn2-0dktm3klv8XY6H...
+Decrypted Text:  hello team
+
+==========================================================================
+
+
+In Your Own Code
+
+You can import and use the functions directly:
+
+from algorithm_package import algorithm
+from string_encryption import encrypt_string, decrypt_string
+
+# Encrypt
+key, cipher = encrypt_string("secret message")
+
+# Decrypt
+plain = decrypt_string(key, cipher)
+print("Decrypted:", plain)
