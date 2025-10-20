@@ -1,31 +1,106 @@
-# CS3100 Algorithm (Group 2)
+# Dual Defense
 
-This algorithm is meant to ensure Integrity.
+Dual Defense is a Vanilla JS Front end, FastAPI Backend. Custom Algorithm to demonstrate Sufficient Encryption & Input Validation.
 
-## Installation
 
-To run, you will need the following requirements:
+## Overview
+Web Page input takes message -> Validates Input -> Sends to Backend API -> Encryption Applied to message -> Stores in SQLalchemy Database.
 
-1. Python 3.12.3
-2. Algorithm Package
+
+
+## Setup
+
+1. Clone Repo
 
 ```bash
-pip install algorithm_package
+git clone https://github.com/PhysicistsOfDoom/CS-3100-CryptoAlgorithm.git
+cd CS-3100-CryptoAlgorithm
+```
+2. Set up Virtual Environment
+```
+python -m venv venv
+source venv/bin/activate   # (Mac/Linux)
+venv\Scripts\activate.bat  # (Windows)
 ```
 
+3. Install Dependencies (Optional if you choose to run with Docker)
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Run the Project. There are **3** options!
+### Option 1: Scripts/
+From the repo root /
+```bash
+./Scripts/run.sh
+```
+Windows PowerShell:
+```bash
+.\Scripts\run.bat 
+```
+
+### Option 2: Docker Compose
+
+```bash
+docker-compose up --build
+```
+### Option 3: Manually
+
+```bash
+# Start Backend
+cd Backend/
+uvicorn main:app --reload
+
+# Start Frontend
+cd ../Frontend
+python -m http.server 3000
+```
 ## Usage
-
-```python
-import algorithm_package
-
-# Returns TAG
-tag = algorithm_package.algorithm(key, message)
-
+When both servers are running: The pages by default are accessible via:
 ```
+Backend API: http://localhost:8000
+Frontend: http://localhost:3000
+```
+## Tech Stack
+- FastAPI
+- SQLAlchemy
+- Python 3.11
+- HTML, CSS, JavaScript
+## Project Structure
+CS-3100-CryptoAlgorithm/
+├── Backend/
+│   ├── algorithm_package/
+│   │   ├── __init__.py
+│   │   ├── algorithm.py
+│   │   ├── db.py
+│   │   └── string_encryption.py
+│   ├── DockerFile
+│   ├── main.py
+│   ├── models.py
+│   └── schemas.py
+├── Frontend/
+│   ├── DockerFile
+│   ├── front_end_string_encryption.py
+│   ├── index.html
+│   ├── index.js
+│   └── styles.css
+├── Scripts/
+│   ├── run.bat
+│   └── run.sh
+├── .gitignore
+├── docker-compose.yml
+├── LICENSE
+├── README.md
+├── requirements.txt
+└── setup.py
+
+
 
 ## Contributing
 
-All contributers of Group #2 in CS 3100 contribute to the success and functionality of this package.
+This is a UVU Team demonstrating knowledge of encryption across networks. Both across the wire, through APIs and Storage.
+
 
 ## License
 

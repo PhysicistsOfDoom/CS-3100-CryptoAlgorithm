@@ -1,5 +1,5 @@
 from pydantic import BaseModel, validator
-from typing import Optional
+from typing import Optional, ClassVar
 
 class ItemCreate(BaseModel):
     title: str

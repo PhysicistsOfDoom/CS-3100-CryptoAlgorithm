@@ -1,0 +1,17 @@
+# Frontend/Dockerfile
+FROM python:3.11-slim
+
+
+WORKDIR /app
+
+
+# Copy all frontend files
+COPY . .
+
+
+# Expose port 3000 for frontend
+EXPOSE 3000
+
+
+# Start simple HTTP server
+CMD ["python", "-m", "http.server", "3000"]
