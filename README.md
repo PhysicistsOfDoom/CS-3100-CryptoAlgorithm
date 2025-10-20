@@ -50,7 +50,7 @@ docker-compose up --build
 ```bash
 # Start Backend
 cd Backend/
-uvicorn main:app --reload
+uvicorn Backend.main:app --reload
 
 # Start Frontend
 cd ../Frontend
@@ -67,35 +67,6 @@ Frontend: http://localhost:3000
 - SQLAlchemy
 - Python 3.11
 - HTML, CSS, JavaScript
-## Project Structure
-CS-3100-CryptoAlgorithm/
-├── Backend/
-│   ├── algorithm_package/
-│   │   ├── __init__.py
-│   │   ├── algorithm.py
-│   │   ├── db.py
-│   │   └── string_encryption.py
-│   ├── DockerFile
-│   ├── main.py
-│   ├── models.py
-│   └── schemas.py
-├── Frontend/
-│   ├── DockerFile
-│   ├── front_end_string_encryption.py
-│   ├── index.html
-│   ├── index.js
-│   └── styles.css
-├── Scripts/
-│   ├── run.bat
-│   └── run.sh
-├── .gitignore
-├── docker-compose.yml
-├── LICENSE
-├── README.md
-├── requirements.txt
-└── setup.py
-
-
 
 ## Contributing
 
