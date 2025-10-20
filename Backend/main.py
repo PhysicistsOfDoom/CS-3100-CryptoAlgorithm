@@ -3,9 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text, select
 
-from .db import Base, engine, get_db
-from .models import Item
-from .schemas import ItemCreate, ItemOut
+from Backend.db import Base, engine, get_db
+from Backend.models import Item
+from Backend.schemas import ItemCreate, ItemOut
 
 app = FastAPI(title="Starter API")
 
