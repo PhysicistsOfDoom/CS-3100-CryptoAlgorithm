@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // If the form validation function returns true send the post request to the route in fetch
         if (validateForm(name, message)) {
-            fetch("/", {
+            fetch("http://127.0.0.1:8000", {
                 method: "POST",
                 headers: {
                     "Content-Type": "Application/json"
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const name = document.getElementById("getName").value;
 
-        fetch(`/${name}`) 
+        fetch(`http://127.0.0.1:8000/${name}`) 
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
