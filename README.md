@@ -31,7 +31,7 @@ Users can enter plain text messages, encrypt them, store them securely in a SQLi
 ---
 
 ## 🗂️ Project Structure
-
+<pre> ```
 CS-3100-CryptoAlgorithm/
 │
 ├── Backend/
@@ -52,7 +52,7 @@ CS-3100-CryptoAlgorithm/
 ├── setup.py # Project setup script
 └── README.md # You are here
 
-
+``` </pre>
 
 ---
 
@@ -62,18 +62,17 @@ CS-3100-CryptoAlgorithm/
 ```bash
 git clone https://github.com/PhysicistsOfDoom/CS-3100-CryptoAlgorithm.git
 cd CS-3100-CryptoAlgorithm
+
 2️⃣ Create and Activate a Virtual Environment
-
-
 python -m venv venv
 source venv/Scripts/activate    # On Windows
 # OR
 source venv/bin/activate        # On Mac/Linux
+
 3️⃣ Install Dependencies
-
 pip install -r requirements.txt
-4️⃣ Run the Backend (FastAPI)
 
+4️⃣ Run the Backend (FastAPI)
 uvicorn Backend.main:app --reload
 The backend will start at
 👉 http://127.0.0.1:8000
@@ -83,7 +82,6 @@ You can test API routes directly here:
 
 5️⃣ Run the Frontend
 Open another terminal:
-
 cd Frontend
 python -m http.server 5500
 Then visit:
