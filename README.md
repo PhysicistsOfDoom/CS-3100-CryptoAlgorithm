@@ -58,7 +58,7 @@ CS-3100-CryptoAlgorithm/
 
 ## 🚀 Getting Started
 
-### 
+ 
 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/PhysicistsOfDoom/CS-3100-CryptoAlgorithm.git
