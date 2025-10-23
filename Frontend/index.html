@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS-3100 Group Project</title>
-    <script src="index.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS3100 Encryption Project</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="index.js" defer></script>
 </head>
 <body>
-    <main>
-        <div class="message-display">
+  <main>
+    <h1>🔐 CS3100 Encryption System</h1>
 
-        </div>
+    <!-- Output display -->
+    <div class="message-display" id="messageDisplay">
+      <p class="placeholder">Results will appear here...</p>
+    </div>
 
-        <div class="get-message-container">
-            <h2>Get Message</h2>
+    <!-- Send message form -->
+    <div class="message-form-container">
+      <h2>Send Message</h2>
+      <form id="message-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
 
-            <form id="get-message-form">
-                <label for="name">Name:</label><br>
-                <input type="text" id="getName" name="getName" required><br><br>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
 
-                <input type="submit" value="Submit">
-            </form>
-        </div>
+        <input type="submit" value="Encrypt & Send" />
+      </form>
+    </div>
 
-        <div class="message-form-container">
-            <h2>Send Message</h2>
+    <!-- Retrieve message form -->
+    <div class="get-message-container">
+      <h2>Get Message</h2>
+      <form id="get-message-form">
+        <label for="getName">Name:</label>
+        <input type="text" id="getName" name="getName" required />
 
-            <form id="message-form">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name" required><br><br>
-
-                <label for="message">Message:</label><br>
-                <textarea id="message" name="message" rows="5" cols="30" required></textarea><br><br>
-
-                <input type="submit" value="Submit">
-            </form>
-        </div>
-    </main>
+        <input type="submit" value="Decrypt Message" />
+      </form>
+    </div>
+  </main>
 </body>
 </html>

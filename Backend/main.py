@@ -1,50 +1,78 @@
+# Backend/main.py
+# Group Project: CS3100 Encryption API
+# Author: Vip Monty (Group 2)
+# Description: Accepts input from the frontend, encrypts the message, stores it in SQLite,
+# and allows retrieval (with decryption) by name.
+
+from Backend.algorithm_package.string_encryption import encrypt_string, decrypt_string
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from sqlalchemy import text, select
-
+from sqlalchemy import select
+from pydantic import BaseModel
 from Backend.db import Base, engine, get_db
-from Backend.models import Item
-from Backend.schemas import ItemCreate, ItemOut
+from Backend.models import Message
 
-app = FastAPI(title="Starter API")
+# -------------------------------------------------------
+# Initialize FastAPI app
+# -------------------------------------------------------
+app = FastAPI(title="CS3100 Encryption API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Create tables at boot
+# -------------------------------------------------------
+# Create database tables at startup
+# -------------------------------------------------------
 @app.on_event("startup")
 def on_startup():
     Base.metadata.create_all(bind=engine)
 
-@app.get("/health")
-def health(db: Session = Depends(get_db)):
-    db.execute(text("SELECT 1"))
-    return {"ok": True}
+# -------------------------------------------------------
+# Root route (homepage)
+# -------------------------------------------------------
+@app.get("/")
+def home():
+    return {"message": "Welcome to the CS3100 Encryption API!"}
 
-# ---- Items (CRUD-lite) ----
-@app.post("/items", response_model=ItemOut, status_code=201)
-def create_item(body: ItemCreate, db: Session = Depends(get_db)):
-    # Pydantic validation will automatically check for SQL injection patterns
-    item = Item(title=body.title, description=body.description)
-    db.add(item)
+# -------------------------------------------------------
+# Pydantic models for input/output
+# -------------------------------------------------------
+class MessageIn(BaseModel):
+    name: str
+    message: str
+
+class MessageOut(BaseModel):
+    id: int
+    name: str
+    encrypted_message: str
+    key: str
+
+# -------------------------------------------------------
+# API routes
+# -------------------------------------------------------
+
+# Encrypt and store message
+@app.post("/message", response_model=MessageOut)
+def create_message(data: MessageIn, db: Session = Depends(get_db)):
+    key, encrypted_text = encrypt_string(data.message)
+    new_msg = Message(name=data.name, encrypted_message=encrypted_text, key=key)
+    db.add(new_msg)
     db.commit()
-    db.refresh(item)
-    return item
+    db.refresh(new_msg)
+    return new_msg
 
-@app.get("/items", response_model=list[ItemOut])
-def list_items(db: Session = Depends(get_db)):
-    items = db.execute(select(Item).order_by(Item.id)).scalars().all()
-    return items
+# Retrieve and decrypt message
+@app.get("/message/{name}")
+def get_message(name: str, db: Session = Depends(get_db)):
+    msg = db.execute(select(Message).where(Message.name == name)).scalar_one_or_none()
+    if not msg:
+        raise HTTPException(status_code=404, detail="Message not found")
 
-@app.get("/items/{item_id}", response_model=ItemOut)
-def get_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.get(Item, item_id)
-    if not item:
-        raise HTTPException(404, "Item not found")
-    return item
+    decrypted = decrypt_string(msg.key, msg.encrypted_message)
+    return {"name": msg.name, "message": decrypted}
