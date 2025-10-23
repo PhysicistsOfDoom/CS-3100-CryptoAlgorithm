@@ -5,3 +5,28 @@ cffi==2.0.0
 cryptography==46.0.1
 pycparser==2.23
 
+-e git+https://github.com/PhysicistsOfDoom/CS-3100-CryptoAlgorithm.git@6d52a19ab7e077795eb2753e6ab8eee9db2b2bf0#egg=algorithm_package
+annotated-types==0.7.0
+anyio==4.11.0
+cffi==2.0.0
+click==8.3.0
+colorama==0.4.6
+cryptography==46.0.1
+fastapi==0.119.1
+greenlet==3.2.4
+h11==0.16.0
+httptools==0.7.1
+idna==3.11
+pycparser==2.23
+pydantic==2.12.3
+pydantic_core==2.41.4
+python-dotenv==1.1.1
+PyYAML==6.0.3
+sniffio==1.3.1
+SQLAlchemy==2.0.44
+starlette==0.48.0
+typing-inspection==0.4.2
+typing_extensions==4.15.0
+uvicorn==0.38.0
+watchfiles==1.1.1
+websockets==15.0.1

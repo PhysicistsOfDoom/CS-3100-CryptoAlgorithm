@@ -1,8 +1,6 @@
 // index.js
 // CS3100 Encryption Project - Frontend
 // Author: Vip Monty (Group 2)
-// Description: Sends plaintext messages to the FastAPI backend for encryption,
-// and retrieves decrypted messages by name.
 
 document.addEventListener("DOMContentLoaded", () => {
     const sendForm = document.getElementById("message-form");

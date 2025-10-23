@@ -1,3 +1,4 @@
+# Backend/models.py
 from sqlalchemy import Column, Integer, String
 from Backend.db import Base
 
@@ -7,4 +8,3 @@ class Message(Base):
     name = Column(String, unique=True, nullable=False)
     encrypted_message = Column(String, nullable=False)
     key = Column(String, nullable=False)
-

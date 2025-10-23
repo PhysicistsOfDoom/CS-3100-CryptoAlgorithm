@@ -1,107 +1,158 @@
-# Dual Defense
+# 🔐 CS3100 Encryption Project
+**Author:** Abdullah Kareem, Corbin Beus, Joashua Slaugh, Tanner Bingham and Vip Monty (Group 2)  
+**Course:** CS 3100 — Data Privacy and Security  
 
-Dual Defense is a Vanilla JS Front end, FastAPI Backend. Custom Algorithm to demonstrate Sufficient Encryption & Input Validation.
+This project demonstrates a **full-stack encryption web application** built with **FastAPI (backend)** and a **HTML/CSS/JavaScript (frontend)** interface.  
+Users can enter plain text messages, encrypt them, store them securely in a SQLite database, and retrieve the decrypted version later.
+
+---
+
+## 🌐 Features
+
+✅ **Frontend (User Interface)**
+- Simple and intuitive HTML/CSS form design.  
+- Allows users to:
+  - Submit a message for encryption.
+  - Retrieve a decrypted message by name.
+- Displays clear visual feedback for encrypted and decrypted data.
+
+✅ **Backend (FastAPI)**
+- Uses **Fernet symmetric encryption** for secure message handling.
+- Stores each encrypted message and key in **SQLite**.
+- Provides REST endpoints for:
+  - `POST /message` — Encrypt and store a message.
+  - `GET /message/{name}` — Retrieve and decrypt a message.
+- Cross-Origin Resource Sharing (CORS) enabled for frontend communication.
+
+✅ **Database**
+- Simple SQLite database (`app.db`) managed through SQLAlchemy.
+- Automatically created at startup.
+
+---
+
+## 🗂️ Project Structure
+
+CS-3100-CryptoAlgorithm/
+│
+├── Backend/
+│ ├── main.py # FastAPI entry point
+│ ├── db.py # Database connection setup
+│ ├── models.py # SQLAlchemy Message model
+│ ├── algorithm_package/
+│ │ └── string_encryption.py # Encryption & decryption logic
+│ └── app.db # SQLite database (auto-created)
+│
+├── Frontend/
+│ ├── index.html # User interface
+│ ├── index.js # Handles frontend API calls
+│ ├── styles.css # Layout and styling
+│
+├── requirements.txt # Python dependencies
+├── docker-compose.yml # Optional Docker setup
+├── setup.py # Project setup script
+└── README.md # You are here
 
 
-## Overview
-Web Page input takes message -> Validates Input -> Sends to Backend API -> Encryption Applied to message -> Stores in SQLalchemy Database.
 
+---
 
+## 🚀 Getting Started
 
-## Setup
-
-1. Clone Repo
-
+### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/PhysicistsOfDoom/CS-3100-CryptoAlgorithm.git
 cd CS-3100-CryptoAlgorithm
-```
-2. Set up Virtual Environment
-```
+2️⃣ Create and Activate a Virtual Environment
+
+
 python -m venv venv
-source venv/bin/activate   # (Mac/Linux)
-venv\Scripts\activate.bat  # (Windows)
-```
+source venv/Scripts/activate    # On Windows
+# OR
+source venv/bin/activate        # On Mac/Linux
+3️⃣ Install Dependencies
 
-3. Install Dependencies (Optional if you choose to run with Docker)
-
-```bash
 pip install -r requirements.txt
-```
+4️⃣ Run the Backend (FastAPI)
 
-4. Run the Project. There are **3** options!
-### Option 1: Scripts/
-From the repo root /
-```bash
-./Scripts/run.sh
-```
-Windows PowerShell:
-```bash
-.\Scripts\run.bat 
-```
+uvicorn Backend.main:app --reload
+The backend will start at
+👉 http://127.0.0.1:8000
 
-### Option 2: Docker Compose
+You can test API routes directly here:
+👉 http://127.0.0.1:8000/docs
 
-```bash
-docker-compose up --build
-```
-### Option 3: Manually
+5️⃣ Run the Frontend
+Open another terminal:
 
-```bash
-# Start Backend
-cd Backend/
-uvicorn main:app --reload
+cd Frontend
+python -m http.server 5500
+Then visit:
+👉 http://127.0.0.1:5500 or localhost:5500
 
-# Start Frontend
-cd ../Frontend
-python -m http.server 3000
-```
-## Usage
-When both servers are running: The pages by default are accessible via:
-```
-Backend API: http://localhost:8000
-Frontend: http://localhost:3000
-```
-## Tech Stack
-- FastAPI
-- SQLAlchemy
-- Python 3.11
-- HTML, CSS, JavaScript
-## Project Structure
-CS-3100-CryptoAlgorithm/
-├── Backend/
-│   ├── algorithm_package/
-│   │   ├── __init__.py
-│   │   ├── algorithm.py
-│   │   ├── db.py
-│   │   └── string_encryption.py
-│   ├── DockerFile
-│   ├── main.py
-│   ├── models.py
-│   └── schemas.py
-├── Frontend/
-│   ├── DockerFile
-│   ├── front_end_string_encryption.py
-│   ├── index.html
-│   ├── index.js
-│   └── styles.css
-├── Scripts/
-│   ├── run.bat
-│   └── run.sh
-├── .gitignore
-├── docker-compose.yml
-├── LICENSE
-├── README.md
-├── requirements.txt
-└── setup.py
+🧠 How It Works
+User enters a message in the frontend form.
+The message is sent via a POST request to the FastAPI backend.
+
+The backend:
+Generates a unique encryption key.
+Encrypts the message using the key.
+Stores both in the SQLite database.
+When the user requests the same name, the backend decrypts the message and returns it.
+
+📡 API Endpoints
+Method	Endpoint	Description
+GET	/	Health check / Welcome message
+POST	/message	Encrypts and stores a new message
+GET	/message/{name}	Retrieves and decrypts a stored message
+
+Example JSON Payload:
+POST /message
+json
+
+{
+  "name": "vip",
+  "message": "hello team!"
+}
+Response:
+json
+
+{
+  "id": 1,
+  "name": "vip",
+  "encrypted_message": "gAAAAABlW...",
+  "key": "f-KxK2fHS..."
+}
+🛠️ Technologies Used
+Python 3.11+
+FastAPI
+SQLAlchemy
+Cryptography (Fernet)
+HTML / CSS / JavaScript
+SQLite
+
+📘 Example Workflow
+Start backend → uvicorn Backend.main:app --reload (from root directory, which contains both backend and frontend directory)
+
+Start frontend → python -m http.server 5500 (from frontend directory)
+
+Open browser → http://127.0.0.1:5500 or localhost:5500
+
+Enter:
+
+Name: vip
+Message: hello team!
+Click Encrypt & Send
+→ You’ll see the encrypted text and key displayed.
+
+Enter the same name under Get Message
+→ The decrypted message “hello team!” appears.
+
+🧹 .gitignore Recommendation
+To avoid clutter in version control, include this in your .gitignore:
 
 
-
-## Contributing
-
-This is a UVU Team demonstrating knowledge of encryption across networks. Both across the wire, through APIs and Storage.
-
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+venv/
+Scripts/
+__pycache__/
+*.db
+.env

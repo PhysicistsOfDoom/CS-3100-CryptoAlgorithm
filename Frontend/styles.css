@@ -1,3 +1,9 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 40px;
+}
+
 /* Title */
 h1 {
   text-align: center;
