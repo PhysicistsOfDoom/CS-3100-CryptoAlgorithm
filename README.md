@@ -74,7 +74,7 @@ source venv/bin/activate        # On Mac/Linux
 3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-4️⃣ Run the Backend (FastAPI)
+4️⃣ Run the Backend (FastAPI) from CS-3100-CryptoAlgorithm/
 uvicorn Backend.main:app --reload
 The backend will start at
 👉 http://127.0.0.1:8000
