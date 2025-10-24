@@ -94,6 +94,7 @@ ctrl + c if backend server is running
 from CS-3100-CryptoAlgorithm/
 python view_db.py
 
+
 🧠 How It Works
 User enters a message in the frontend form.
 The message is sent via a POST request to the FastAPI backend.
@@ -161,3 +162,68 @@ Scripts/
 __pycache__/
 *.db
 .env
+
+🐳 Running the Project with Docker
+
+This project includes a preconfigured Dockerfile so you can run the entire FastAPI backend and static frontend inside one container.
+
+✅ 1️⃣ Build the Docker image
+
+From your project root (CS-3100-CryptoAlgorithm/):
+
+docker build -t cs3100-encryption-app .
+
+
+Docker will:
+
+Download a lightweight Python 3.11 image
+
+Install dependencies (including Git)
+
+Copy your project files
+
+Configure both the FastAPI backend (port 8000) and the static frontend (port 5500)
+
+✅ 2️⃣ Run the container
+docker run -d -p 8000:8000 -p 5500:5500 cs3100-encryption-app
+
+Service	URL
+🌐 Frontend	http://127.0.0.1:5500
+
+⚙️ Backend API	http://127.0.0.1:8000
+
+📘 Swagger Docs	http://127.0.0.1:8000/docs
+✅ 3️⃣ Stop or remove the container
+
+List containers:
+
+docker ps
+
+
+Stop a running one:
+
+docker stop <container_id>
+
+
+Remove old containers (optional):
+
+docker rm <container_id>
+
+⚙️ Troubleshooting
+Issue	Solution
+port is already allocated	Stop the existing container using port 8000: docker ps → docker stop <id>
+Frontend changes not showing	Rebuild the image: docker build --no-cache -t cs3100-encryption-app .
+Form not resetting inside Docker	Added <meta http-equiv="Cache-Control"> tags in index.html to prevent browser caching
+🧹 Cleanup commands
+
+Remove all stopped containers and dangling images:
+
+docker system prune -af
+
+🧠 Quick Summary
+
+Build once → docker build -t cs3100-encryption-app .
+
+Run anywhere → docker run -d -p 8000:8000 -p 5500:5500 cs3100-encryption-app
+
+Visit → http://127.0.0.1:5500

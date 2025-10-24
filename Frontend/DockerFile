@@ -1,17 +1,26 @@
-# Frontend/Dockerfile
-FROM python:3.11-slim
+# ===============================
+#  CS3100 Encryption Project
+#  Author: Vip Monty (Group 2)
+# ===============================
 
+FROM python:3.11-slim AS backend
 
+# Set working directory
 WORKDIR /app
 
+# Install git so pip can clone repos
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Copy all frontend files
-COPY . .
+# Copy dependency file and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy project files
+COPY Backend ./Backend
+COPY Frontend ./Frontend
 
-# Expose port 3000 for frontend
-EXPOSE 3000
+# Expose ports
+EXPOSE 8000
 
-
-# Start simple HTTP server
-CMD ["python", "-m", "http.server", "3000"]
+# Start FastAPI
+CMD ["uvicorn", "Backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
