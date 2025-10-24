@@ -89,6 +89,11 @@ python -m http.server 5500
 Then visit:
 👉 http://127.0.0.1:5500 or localhost:5500
 
+6️⃣ Access backend database
+ctrl + c if backend server is running
+from CS-3100-CryptoAlgorithm/
+python view_db.py
+
 🧠 How It Works
 User enters a message in the frontend form.
 The message is sent via a POST request to the FastAPI backend.
