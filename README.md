@@ -163,6 +163,7 @@ __pycache__/
 *.db
 .env
 
+==Dockerfile will need Docker Desktop Installer.exe installed to initial APP using Dockerfile Method==
 🐳 Running the Project with Docker
 
 This project includes a preconfigured Dockerfile so you can run the entire FastAPI backend and static frontend inside one container.
