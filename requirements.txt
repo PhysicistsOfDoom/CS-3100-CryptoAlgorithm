@@ -24,3 +24,8 @@ typing_extensions==4.15.0
 uvicorn==0.38.0
 watchfiles==1.1.1
 websockets==15.0.1
+# SECURITY FIX: Added packages for security improvements
+slowapi==0.1.9  # SECURITY FIX: Rate limiting to prevent brute force attacks
+python-jose[cryptography]==3.3.0  # SECURITY FIX: JWT token generation/validation for authentication
+passlib[bcrypt]==1.7.4  # SECURITY FIX: Secure password hashing with bcrypt
+python-multipart==0.0.9  # SECURITY FIX: Required for OAuth2PasswordRequestForm (login endpoint)
